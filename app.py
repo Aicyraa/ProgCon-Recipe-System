@@ -1,5 +1,6 @@
 def greet():
     print(f'''
+{'*' * 70}
           Welcome to the Digital Recipe Management App!
           ==== ==== == Available commands: == ==== ====
           > "1" for add recipe
@@ -7,6 +8,7 @@ def greet():
           > "3" for search recipe
           > "4" for delete recipe
           > "5" for exit
+{'*' * 70}
           ''')
 
 def add_recipe():
@@ -52,6 +54,34 @@ def process_steps():
     
     return storage
 
+def view_recipes():  # Function to display recipes
+    if len(recipe_storage) == 0:  # Check if there are no recipes
+        print("No recipes available.")
+        return
+    
+    for i in range(len(recipe_storage)):  # Loop through each recipe
+        recipe = recipe_storage[i]
+        print(f"\nRecipe {i+1}: {recipe['name']}")
+        print(f"Type: {recipe['type']}")
+
+        # Display ingredients
+        print("Ingredients:")
+        ingredients = recipe['ingredients']
+        if len(ingredients) == 0:
+            print("  - No ingredients listed.")
+        else:
+            for item in ingredients:
+                print(f"  - {item}")
+
+        # Display steps
+        print("Steps:")
+        steps = recipe['steps']
+        if len(steps) == 0:
+            print("  1. No steps listed.")
+        else:
+            for idx in range(len(steps)):  # Loop through each step with numbering
+                print(f"  {idx+1}. {steps[idx]}")
+
 # main
 
 recipe_storage = [ # container / storage for the recipes
@@ -66,7 +96,7 @@ while True:
         add_recipe()
         print(f'{recipe_storage[0]}')
     elif command == 2:
-        pass
+        view_recipes()
     elif command == 3:
         pass
     elif command == 4:
