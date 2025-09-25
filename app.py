@@ -1,15 +1,16 @@
 def greet():
     print(f'''
-{'*' * 70}
-          Welcome to the Digital Recipe Management App!
-          ==== ==== == Available commands: == ==== ====
-          > "1" for add recipe
-          > "2" for view recipes
-          > "3" for search recipe
-          > "4" for delete recipe
-          > "5" for exit
-{'*' * 70}
+\033[93m{'*' * 70}\033[0m
+\033[1;92m    Welcome to the Digital Recipe Management App!\033[0m
+\033[95m      ==== ==== == Available commands: == ==== ====\033[0m
+\033[94m      > "1" for add recipe\033[0m
+\033[94m      > "2" for view recipes\033[0m
+\033[94m      > "3" for search recipe\033[0m
+\033[94m      > "4" for delete recipe\033[0m
+\033[91m      > "5" for exit\033[0m
+\033[93m{'*' * 70}\033[0m
           ''')
+
 
 def add_recipe():
   
@@ -55,33 +56,31 @@ def process_steps():
     return storage
 
 def view_recipes():  # Function to display recipes
+    print('\033[91m-\033[0m' * 20)     
     if len(recipe_storage) == 0:  # Check if there are no recipes
         print("No recipes available.")
         return
     
     for i in range(len(recipe_storage)):  # Loop through each recipe
         recipe = recipe_storage[i]
-        print(f"\nRecipe {i+1}: {recipe['name']}")
-        print(f"Type: {recipe['type']}")
+        print(f"\033[93mRecipe {i+1}:\033[0m: {recipe['name']}")
+        print(f"\033[93mType:\033[0m {recipe['type']}")
 
         # Display ingredients
-        print("Ingredients:")
         ingredients = recipe['ingredients']
-        if len(ingredients) == 0:
-            print("  - No ingredients listed.")
+        if not ingredients:
+            print(" - No ingredients listed.")
         else:
-            for item in ingredients:
-                print(f"  - {item}")
+           print(f'\033[93mIngredients:\033[0m {', '.join(ingredients)}')
 
         # Display steps
-        print("Steps:")
         steps = recipe['steps']
-        if len(steps) == 0:
-            print("  1. No steps listed.")
+        if not steps:
+            print("1. No steps listed.")
         else:
-            for idx in range(len(steps)):  # Loop through each step with numbering
-                print(f"  {idx+1}. {steps[idx]}")
-
+            steps_inline = " || ".join(f"{idx+1}. {step}" for idx, step in enumerate(steps))
+            print(f"\033[93mSteps:\033[0m {steps_inline}")
+        print('\033[91m-\033[0m' * 20)     
 # main
 
 recipe_storage = [ # container / storage for the recipes
@@ -102,7 +101,7 @@ while True:
     elif command == 4:
         pass
     elif command == 5:
-        pass
+        break
     else:
         print(f'Invalid command!')
         
