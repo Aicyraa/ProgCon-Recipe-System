@@ -57,7 +57,7 @@ def process_steps():
 
 def view_recipes():  # Function to display recipes
     print('\033[91m-\033[0m' * 20)     
-    if len(recipe_storage) == 0:  # Check if there are no recipes
+    if not recipe_storage:  # Check if there are no recipes
         print("No recipes available.")
         return
     
@@ -69,14 +69,14 @@ def view_recipes():  # Function to display recipes
         # Display ingredients
         ingredients = recipe['ingredients']
         if not ingredients:
-            print(" - No ingredients listed.")
+            print("No ingredients listed.")
         else:
            print(f'\033[93mIngredients:\033[0m {', '.join(ingredients)}')
 
         # Display steps
         steps = recipe['steps']
         if not steps:
-            print("1. No steps listed.")
+            print("No steps listed.")
         else:
             steps_inline = " || ".join(f"{idx+1}. {step}" for idx, step in enumerate(steps))
             print(f"\033[93mSteps:\033[0m {steps_inline}")
@@ -85,7 +85,7 @@ def view_recipes():  # Function to display recipes
 
 recipe_storage = [ # container / storage for the recipes
                   {'name': 'Adobo', 'type': 'Main Dish', 'ingredients': ['Toyo', 'Suka', 'Asukal'], 'steps': ['Heat atsuete oil in pot', 'Add Garlic, Ginder and Onion']},
-                  {'name': 'Sinigang', 'type': 'Soup', 'ingredients': ['Sinigang Mix', 'Baboy / Karne', 'Gulay'], 'steps': ['Simmer Pork', 'Add Vegetables']}
+                  {'name': 'Sinigang', 'type': 'Soup', 'ingredients': ['Sinigang Mix', 'Baboy / Karne', 'Gulay'], 'steps': ['Simmer Pork', 'Add Vegetables']},
                 ] 
 while True:
     greet()
