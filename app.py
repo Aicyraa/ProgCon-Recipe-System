@@ -1,14 +1,14 @@
 def greet():
     print(f'''
-\033[93m{'*' * 70}\033[0m
-\033[1;92m    Welcome to the Digital Recipe Management App!\033[0m
-\033[95m      ==== ==== == Available commands: == ==== ====\033[0m
-\033[94m      > "1" for add recipe\033[0m
-\033[94m      > "2" for view recipes\033[0m
-\033[94m      > "3" for search recipe\033[0m
-\033[94m      > "4" for delete recipe\033[0m
-\033[91m      > "5" for exit\033[0m
-\033[93m{'*' * 70}\033[0m
+    \033[93m{'*' * 70}\033[0m
+    \033[1;92mWelcome to the Digital Recipe Management App!\033[0m
+    \033[95m==== ==== == Available commands: == ==== ====\033[0m
+    \033[94m> "1" for add recipe\033[0m
+    \033[94m> "2" for view recipes\033[0m
+    \033[94m> "3" for search recipe\033[0m
+    \033[94m> "4" for delete recipe\033[0m
+    \033[91m> "5" for exit\033[0m
+    \033[93m{'*' * 70}\033[0m
           ''')
 
 
@@ -82,7 +82,6 @@ def view_recipes():
 
 def search_recipe():
     recipe_name = input("Enter recipe you want to search: ").strip().lower()
-    found = False
     for recipe in recipe_storage:
         if recipe['name'].lower() == recipe_name:
             print("\033[92m=== Recipe Found! ===\033[0m")
@@ -90,10 +89,9 @@ def search_recipe():
             print(f"\033[93mType:\033[0m {recipe['type']}")
             print(f"\033[93mIngredients:\033[0m {', '.join(recipe['ingredients'])}")
             print(f"\033[93mSteps:\033[0m {', '.join(recipe['steps'])}")
-            found = True
-            break
-    if not found:
-        print("\033[91mRecipe not found.\033[0m")
+            return
+        
+    print("\033[91mRecipe not found.\033[0m")
 
 
 def delete_recipe():
